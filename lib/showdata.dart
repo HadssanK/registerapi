@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:assignmentlogin/apilink.dart';
+import 'package:assignmentlogin/login.dart';
 import 'package:assignmentlogin/uidesign.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,10 @@ class _MydataState extends State<Mydata> {
   }
 
   @override
+  void logout() async{
+    await FirebaseAuth.instance.signOut();
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Login()));
+  }
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,11 +69,15 @@ class _MydataState extends State<Mydata> {
                             fontWeight: FontWeight.w500
                         ),),
                       ),
-                      ListTile(
+                      TextButton(onPressed: (){
+                        logout();
+                      }, child:   ListTile(
                         leading: Icon(Icons.login_outlined),
                         title: Text("Logout"),
                         // subtitle: Text("sdfsdfsd"),
                       ),
+                      ),
+                    
                     ],
                   ),
 
